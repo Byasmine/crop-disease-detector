@@ -1,0 +1,16 @@
+models:
+  Tomate:
+    path: models/model_tomato_v4.pt
+    type: classification
+    backbone: efficientnet_b0
+    classes: []
+  Pomme de terre:
+    path: models/model_potato_v4.pt
+    type: classification
+    backbone: efficientnet_b0
+    classes: []
+  Maïs:
+    path: models/model_maize_v4.pt
+    type: classification
+    backbone: efficientnet_b0
+    classes: []

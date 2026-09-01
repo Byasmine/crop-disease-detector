@@ -1,0 +1,147 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-tomato: var(--tomato);
+  --color-tomato-soft: var(--tomato-soft);
+  --color-potato: var(--potato);
+  --color-potato-soft: var(--potato-soft);
+  --color-maize: var(--maize);
+  --color-maize-soft: var(--maize-soft);
+  --color-ink: var(--ink);
+  --color-mist: var(--mist);
+  --color-signal: var(--signal);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.35);
+  --font-sans: var(--font-plex-sans), 'Segoe UI', sans-serif;
+  --font-serif: var(--font-syne), Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+:root {
+  color-scheme: light;
+  --background: #edf2ef;
+  --foreground: #12201a;
+  --card: #f7faf8;
+  --card-foreground: #12201a;
+  --popover: #f7faf8;
+  --popover-foreground: #12201a;
+  --primary: #0f3d32;
+  --primary-foreground: #f4faf6;
+  --secondary: #dce8e1;
+  --secondary-foreground: #0f3d32;
+  --muted: #e4ece7;
+  --muted-foreground: #5a6f65;
+  --accent: #d7f0e4;
+  --accent-foreground: #0d3329;
+  --border: #c8d6ce;
+  --input: #c8d6ce;
+  --ring: #1a7a5c;
+  --success: #1a7a5c;
+  --success-soft: #d4eee3;
+  --danger: #b42318;
+  --danger-soft: #f8e4e1;
+  --warning: #9a6700;
+  --warning-soft: #f5edd4;
+  --tomato: #c2410c;
+  --tomato-soft: #fde8dc;
+  --potato: #8a6a3b;
+  --potato-soft: #f3ead8;
+  --maize: #a16207;
+  --maize-soft: #f6edd4;
+  --ink: #0b1a14;
+  --mist: #f3f7f4;
+  --signal: #20a67a;
+  --radius: 0.65rem;
+}
+
+* { @apply border-border outline-ring/50; }
+html { background: var(--background); }
+body {
+  @apply bg-background text-foreground font-sans;
+  background-image:
+    radial-gradient(ellipse 90% 55% at 10% -10%, #d8efe4 0%, transparent 55%),
+    radial-gradient(ellipse 70% 45% at 100% 0%, #e8f0ea 0%, transparent 50%),
+    linear-gradient(180deg, #edf2ef 0%, #e8eee9 100%);
+  background-attachment: fixed;
+}
+button, input { font: inherit; }
+::selection { background: color-mix(in oklab, var(--signal) 28%, white); color: var(--ink); }
+
+@keyframes folium-scan {
+  0% { transform: translateY(-120%); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateY(220%); opacity: 0; }
+}
+
+@keyframes folium-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes folium-pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--signal) 35%, transparent); }
+  50% { box-shadow: 0 0 0 10px color-mix(in oklab, var(--signal) 0%, transparent); }
+}
+
+@keyframes folium-draw {
+  from { stroke-dashoffset: 120; }
+  to { stroke-dashoffset: 0; }
+}
+
+.folium-scan-line {
+  animation: folium-scan 1.8s ease-in-out infinite;
+}
+
+.folium-enter {
+  animation: folium-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.folium-enter-delay-1 { animation-delay: 0.08s; }
+.folium-enter-delay-2 { animation-delay: 0.16s; }
+.folium-enter-delay-3 { animation-delay: 0.24s; }
+
+.folium-live {
+  animation: folium-pulse-ring 2.4s ease-in-out infinite;
+}
+
+.folium-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 40%, black 20%, transparent 75%);
+}
+
+.folium-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+}
