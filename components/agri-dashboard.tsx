@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, useTransition, type ComponentProps } from 'react'
 import { analyzeLeaf, fetchHealth } from '@/lib/api'
 import { ConfidenceRing } from '@/components/dashboard/confidence-ring'
+import { DiagnosisChat } from '@/components/dashboard/diagnosis-chat'
 import { JournalView } from '@/components/dashboard/journal-view'
 import { ModelsView } from '@/components/dashboard/models-view'
 import {
@@ -544,31 +545,34 @@ function ResultPanel({ result }: { result: Analysis }) {
         : 'bg-danger-soft text-danger'
 
   return (
-    <div className="grid gap-5 md:grid-cols-[auto_1fr]">
-      <ConfidenceRing value={result.confidence} status={result.status} size={88} />
-      <div>
-        <div className="flex flex-wrap items-center gap-2">
-          <span className={`rounded-md px-2.5 py-1 text-xs font-semibold ${statusClass}`}>
-            {result.status}
-          </span>
-          <span className="text-sm text-muted-foreground">{result.crop}</span>
-        </div>
-        <h3 className="mt-2 font-serif text-2xl font-bold tracking-tight">{formatLabel(result.label)}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Fiabilité du résultat : <span className="font-semibold text-foreground">{result.confidence.toFixed(0)}%</span> · {result.date}
-        </p>
-        <div className="mt-4 border-t border-border pt-3">
-          <p className="mb-2 text-sm font-medium text-muted-foreground">Que faire ensuite ?</p>
-          <ul className="grid gap-1.5 sm:grid-cols-2">
-            {tips.map((tip) => (
-              <li key={tip} className="flex items-start gap-2 text-xs text-muted-foreground">
-                <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-success" />
-                {tip}
-              </li>
-            ))}
-          </ul>
+    <div>
+      <div className="grid gap-5 md:grid-cols-[auto_1fr]">
+        <ConfidenceRing value={result.confidence} status={result.status} size={88} />
+        <div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className={`rounded-md px-2.5 py-1 text-xs font-semibold ${statusClass}`}>
+              {result.status}
+            </span>
+            <span className="text-sm text-muted-foreground">{result.crop}</span>
+          </div>
+          <h3 className="mt-2 font-serif text-2xl font-bold tracking-tight">{formatLabel(result.label)}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Fiabilité du résultat : <span className="font-semibold text-foreground">{result.confidence.toFixed(0)}%</span> · {result.date}
+          </p>
+          <div className="mt-4 border-t border-border pt-3">
+            <p className="mb-2 text-sm font-medium text-muted-foreground">Que faire ensuite ?</p>
+            <ul className="grid gap-1.5 sm:grid-cols-2">
+              {tips.map((tip) => (
+                <li key={tip} className="flex items-start gap-2 text-xs text-muted-foreground">
+                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-success" />
+                  {tip}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
+      <DiagnosisChat result={result} />
     </div>
   )
 }
